@@ -60,7 +60,7 @@ class RegisteredUserController extends Controller
             dispatch(new SendMail($data));
         });
 
-/*         User::where('email' ,'!=', $user->email)->chunk(20,function($data){
+/*          User::where('email' ,'!=', $user->email)->chunk(20,function($data){
             dispatch (new SendMailsForUsers($data));
         }); */
 

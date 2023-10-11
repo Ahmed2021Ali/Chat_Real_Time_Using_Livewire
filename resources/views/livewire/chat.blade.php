@@ -2,8 +2,11 @@
     <div id="chat" class="container-fluid h-100">
         <div class="row justify-content-center h-100">
             <div class="col-md-8 col-xl-6 chat">
+                <a href="http://127.0.0.1:8000/dashboard" class="my-super-cool-btn">
+                    <h1 class="text-center">Home !</h1>
+                </a>
                 <div class="card" id="chat">
-                    <div class="card-header msg_head" >
+                    <div class="card-header msg_head">
                         <div class="d-flex bd-highlight">
 
                             <div class="img_cont">
