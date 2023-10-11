@@ -2,12 +2,12 @@
 
 namespace App\Listeners;
 
-use App\Mail\SendMails;
+use App\Mail\UserMails;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class RegisterMail
+class UsersMail
 {
     /**
      * Create the event listener.
@@ -22,6 +22,7 @@ class RegisterMail
      */
     public function handle(object $event): void
     {
-        Mail::to($event->data->email)->send(new SendMails($event->data));
+      //  Mail::to($event->data->email)->send(new UserMails($event->data));
+
     }
 }

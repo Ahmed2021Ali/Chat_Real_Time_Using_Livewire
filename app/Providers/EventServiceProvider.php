@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Events\RegisterEven;
+use App\Events\UserEven;
+use App\Listeners\UsersMail;
 use App\Listeners\RegisterMail;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
@@ -23,6 +25,7 @@ class EventServiceProvider extends ServiceProvider
         RegisterEven::class=>[
             RegisterMail::class,
         ],
+
     ];
 
     /**

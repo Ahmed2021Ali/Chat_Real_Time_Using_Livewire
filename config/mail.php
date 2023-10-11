@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('MAIL_MAILER', 'mailgun'),
+    'default' => env('MAIL_MAILER', 'smtp'),
 
     /*
     |--------------------------------------------------------------------------
@@ -100,7 +100,7 @@ return [
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'Admin@gmail.com'),
-        'name' => env('MAIL_FROM_NAME', 'Ahmed Chat'),
+        'name' => env('MAIL_FROM_NAME', 'Chat'),
     ],
 
     /*

@@ -18,9 +18,7 @@
                             </div>
 
                         </div>
-
                     </div>
-
                     <div id="chat" class="card-body msg_card_body">
                         @forelse ($messages as $message)
                             @if ($message->user->id == auth()->user()->id)
@@ -111,5 +109,4 @@
             </div>
         </div>
     </div>
-</div>
 </div>

@@ -336,8 +336,8 @@
                         <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
                             <tr>
                                 <td class="logo" style="text-align: left;">
-                                    <h3>Name : {{ $users->name }}</h3>
-                                    <h4>Email : {{ $users->email }}</h4>
+                                    <h3>Name : {{ $data->name }}</h3>
+                                    <h4>Email : {{ $data->email }}</h4>
                                     <h4> welcome to The Chat</h4>
                                 </td>
                             </tr>

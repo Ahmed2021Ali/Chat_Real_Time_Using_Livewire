@@ -7,16 +7,19 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class WelcomeStartChat extends Notification
+class Message extends Notification
 {
     use Queueable;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    private $message_id;
+    private $message_text;
+    public function __construct($message_id,$message_text)
     {
-        //
+        $this->message_id=$message_id;
+        $this->message_text=$message_text;
     }
 
     /**
@@ -26,7 +29,7 @@ class WelcomeStartChat extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['mail'];
+        return ['database'];
     }
 
     /**
@@ -48,7 +51,10 @@ class WelcomeStartChat extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            //
+              'message_id'=>$this->message_id,
+              'message_text'=>$this->message_text,
+              'create_at'=>auth()->user()->name,
+
         ];
     }
 }

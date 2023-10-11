@@ -2,10 +2,12 @@
 
 namespace App\Livewire;
 
+use App\Models\User;
 use App\Models\Message;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Notification;
 
 class Chat extends Component
 {
@@ -14,11 +16,10 @@ class Chat extends Component
 
     public $message_text;
     public $photo;
-    
+
     public function render()
     {
         $messages = Message::with('user')->latest()->take(10)->get()->sortBy('id');
-
         return view('livewire.chat', compact('messages'));
     }
 
@@ -33,21 +34,22 @@ class Chat extends Component
         if (!empty($this->photo))
         {
             $photoPath = $this->photo->store('attachment', 'public');
-                Message::insert([
+            $message=Message::create([
                     'user_id' => auth()->user()->id,
                     'message_text' => $message_text,
                     'file' => $photoPath,
-                    'created_at' => now()
                 ]);
         }
-
         if (!empty($message_text))
         {
-            Message::create([
+          $message=Message::create([
                 'user_id' => auth()->user()->id,
                 'message_text' => $message_text,
             ]);
         }
+        $users=User::where('id','!=',auth()->user()->id)->get();
+
+        Notification::send($users,new \App\Notifications\Message($message->id,$message->message_text));
 
         $this->reset(['message_text', 'photo']);
     }
@@ -74,10 +76,9 @@ class Chat extends Component
             // Message not found in the database, you can handle this case as per your requirement
             return redirect()->back()->with('error', 'الرساله غسر موجوده بالفعل');
         }
-
-
-
     }
+
+
 
 
 }

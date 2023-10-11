@@ -9,14 +9,14 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class SendMail extends Mailable
+class SendMails extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(public $user)
+    public function __construct(public $data)
     {
         //
     }
@@ -37,7 +37,7 @@ class SendMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.send_user_mail',
+            view: 'mail.register_mail',
         );
     }
 

@@ -3,14 +3,17 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use App\Jobs\SendMail;
 use Illuminate\View\View;
 use App\Http\traits\media;
 use App\Events\RegisterEven;
 use Illuminate\Http\Request;
+use App\Jobs\SendMailsForUsers;
 use Illuminate\Validation\Rules;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Auth\Events\Registered;
 use App\Providers\RouteServiceProvider;
@@ -52,12 +55,18 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-        $users=User::where('email',$user->email)->first();
-        event(new RegisterEven($user));
 
-       Auth::login($user);
+        User::where('email',$user->email)->chunk(20,function($data){
+            dispatch(new SendMail($data));
+        });
+
+/*         User::where('email' ,'!=', $user->email)->chunk(20,function($data){
+            dispatch (new SendMailsForUsers($data));
+        }); */
 
 
+
+        Auth::login($user);
         return redirect(RouteServiceProvider::HOME);
     }
 }
