@@ -1,13 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Livewire;
 
 use App\Models\User;
-use Illuminate\Http\Request;
+use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 
-class NotificationController extends Controller
+class Notification extends Component
 {
+    public function render()
+    {
+        return view('livewire.notification');
+    }
     public function Read_notification_message($id)
     {
         $notification_id=DB::table('notifications')->where('data->message_id',$id)->pluck('id');

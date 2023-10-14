@@ -20,11 +20,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Notification Read_all_notification
-Route::get('Read_notification_message/{id}',[NotificationController::class,'Read_notification_message'])->name('Read_notification_message');
-Route::get('Read_all_notification',[NotificationController::class,'Read_all_notification'])->name('Read_all_notification');
-
-
 Route::get('dashboard/chat', function () {
     return view('layouts.chat');
 })->middleware(['auth']);
